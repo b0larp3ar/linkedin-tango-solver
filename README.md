@@ -5,7 +5,7 @@ Linkedin Tango Solver automatically solves your daily Tango puzzle on Linkedin. 
 ## How to use:
 
 * Open your daily Tango puzzle on linkedin
-<img src="images/puzzle.png">
+<img src="images/puzzle.png" style="height: 300px; width: 600px">
 
 * Right click and click on 'Inspect' to open DevTools
 * Go to browser console
@@ -13,3 +13,4 @@ Linkedin Tango Solver automatically solves your daily Tango puzzle on Linkedin. 
 * Press enter
 * The result will be displayed in a table format
 <img src="images/result.png">
+
