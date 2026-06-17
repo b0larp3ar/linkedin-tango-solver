@@ -1,21 +1,23 @@
+const SIZE=4;
 const E = "empty";
 const X = "sun";
 const O = "moon";
+let equality=[];
+let opposite=[];
 
-function extractPuzzle() {
-    const board = Array(6)
+
+// extract board
+function extractBoard() {
+    const board = Array(SIZE)
         .fill()
-        .map(() => Array(6).fill(E));
-
-    const equality = [];
-    const opposite = [];
+        .map(() => Array(SIZE).fill(E));
 
     const cells = document.querySelectorAll('[data-cell-idx]');
 
     cells.forEach(cell => {
         const idx = Number(cell.getAttribute('data-cell-idx'));
-        const row = Math.floor(idx / 6);
-        const col = idx % 6;
+        const row = Math.floor(idx / SIZE);
+        const col = idx % SIZE;
 
         // Extract sun/moon
         const piece = cell.querySelector(
@@ -31,33 +33,63 @@ function extractPuzzle() {
                 board[row][col] = O;
             }
         }
+    });
 
-        // Extract equality and opposite constraints
+    return board;
+}
+// extract equality/opposite
+function extractConstraints(){
+    const equality = [];
+    const opposite = [];
+
+    const cells = document.querySelectorAll('[data-cell-idx]');
+
+    cells.forEach(cell=>{
+        const idx = Number(
+            cell.getAttribute('data-cell-idx')
+        );
+
+        const row = Math.floor(idx / SIZE);
+
+        const col = idx % SIZE;
+
         const constraints = cell.querySelectorAll(
             '[data-testid="edge-equal"], [data-testid="edge-cross"]'
         );
 
         constraints.forEach(constraint => {
-            const parentClass = constraint.parentElement.className;
             let neighbor = null;
 
-            // DOWN
-            if (parentClass.includes('_945acf7f')) {
-                if (row < 5) {
-                    neighbor = [row + 1, col];
-                }
-            }
+            // Position of current cell
+            const cellRect = cell.getBoundingClientRect();
 
-            // RIGHT
-            else if (parentClass.includes('_115ff098')) {
-                if (col < 5) {
+            // Position of the constraint symbol
+            const edgeRect = constraint.parentElement.getBoundingClientRect();
+
+            const cellCenterX = cellRect.left + cellRect.width / 2;
+            const cellCenterY = cellRect.top + cellRect.height / 2;
+
+            const edgeCenterX = edgeRect.left + edgeRect.width / 2;
+            const edgeCenterY = edgeRect.top + edgeRect.height / 2;
+
+            const dx = edgeCenterX - cellCenterX;
+            const dy = edgeCenterY - cellCenterY;
+
+            // RIGHT constraint
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (col < SIZE-1) {
                     neighbor = [row, col + 1];
                 }
             }
 
-            if (!neighbor) {    // no constraints
-                return;
+            // BOTTOM constraint
+            else {
+                if (row < SIZE-1) {
+                    neighbor = [row + 1, col];
+                }
             }
+
+            if (!neighbor) return;
 
             const pair = [
                 [row, col],
@@ -75,17 +107,15 @@ function extractPuzzle() {
             }
         });
     });
-
     return {
-        board,
-        equality,
+        equality, 
         opposite
-    };
+    }
 }
 
 function isFilled(board){
-    for(let i=0; i<6; i++){
-        for(let j=0; j<6; j++){
+    for(let i=0; i<SIZE; i++){
+        for(let j=0; j<SIZE; j++){
             if(board[i][j]===E){
                 return false;
             }
@@ -95,8 +125,8 @@ function isFilled(board){
 }
 
 function findEmpty(board){
-    for(let i=0; i<6; i++){
-        for(let j=0; j<6; j++){
+    for(let i=0; i<SIZE; i++){
+        for(let j=0; j<SIZE; j++){
             if(board[i][j]===E){
                 return [i,j];
             }
@@ -154,7 +184,7 @@ function checkThreeConsecutive(board,r,c){
             return false;
         }
     }
-    if(c<4){
+    if(c<SIZE-2){
         if(
             board[r][c]===board[r][c+1] &&
             board[r][c+1]===board[r][c+2] &&
@@ -163,7 +193,7 @@ function checkThreeConsecutive(board,r,c){
             return false;
         }
     }
-    if(c>0 && c<5){
+    if(c>0 && c<SIZE-1){
         if(
             board[r][c-1]===board[r][c] &&
             board[r][c]===board[r][c+1] &&
@@ -183,7 +213,7 @@ function checkThreeConsecutive(board,r,c){
             return false;
         }
     }
-    if(r<4){
+    if(r<SIZE-2){
         if(
             board[r][c]===board[r+1][c] &&
             board[r+1][c]===board[r+2][c] &&
@@ -192,7 +222,7 @@ function checkThreeConsecutive(board,r,c){
             return false;
         }
     }
-    if(r>0 && r<5){
+    if(r>0 && r<SIZE-1){
         if(
             board[r-1][c]===board[r][c] &&
             board[r][c]===board[r+1][c] &&
@@ -210,7 +240,7 @@ function checkRowSum(board,r,c){
     let n2 = 0;
     let emptyFound = false;
 
-    for(let i=0; i<6; i++){
+    for(let i=0; i<SIZE; i++){
         if(board[r][i]===X){
             n1++;
         }
@@ -220,7 +250,7 @@ function checkRowSum(board,r,c){
         else{
             emptyFound = true;
         }
-        if(n1>3 || n2>3){
+        if(n1>SIZE/2 || n2>SIZE/2){
             return false;
         }
     }
@@ -235,7 +265,7 @@ function checkColumnSum(board,r,c){
     let n2 = 0;
     let emptyFound = false;
 
-    for(let i=0; i<6; i++){
+    for(let i=0; i<SIZE; i++){
         if(board[i][c]===X){
             n1++;
         }
@@ -245,7 +275,7 @@ function checkColumnSum(board,r,c){
         else{
             emptyFound = true;
         }
-        if(n1>3 || n2>3){
+        if(n1>SIZE/2 || n2>SIZE/2){
             return false;
         }
     }
@@ -266,6 +296,7 @@ function isValid(board,r,c){
     return true;
 }
 
+// solving algorithm
 function solve(board){
     if(isFilled(board)){
         return true;
@@ -291,12 +322,92 @@ function solve(board){
     return false;
 }
 
-const puzzle = extractPuzzle();
+function clickCell(cell){
+    cell.dispatchEvent(
+        new MouseEvent(
+            'mousedown',
+            { bubbles: true }
+        )
+    );
 
-let board = puzzle.board;
-let equality = puzzle.equality;
-let opposite = puzzle.opposite;
+    cell.dispatchEvent(
+        new MouseEvent(
+            'mouseup',
+            { bubbles: true }
+        )
+    );
 
-solve(board);
+    cell.dispatchEvent(
+        new MouseEvent(
+            'click',
+            { bubbles: true }
+        )
+    );
+}
 
-console.table(board);
+// fill the puzzle in linkedin
+function fillBoard(originalBoard, solvedBoard){
+    console.log("Fillboard started executing");
+    const cells = document.querySelectorAll(
+        '[data-cell-idx]'
+    );
+
+    cells.forEach(cell => {
+        const idx = Number(
+            cell.getAttribute('data-cell-idx')
+        );
+
+        const row = Math.floor(idx / SIZE);
+        const col = idx % SIZE;
+
+        // Skip pre-filled cells
+        if(originalBoard[row][col] !== E){
+            return;
+        }
+
+        console.log(
+            "Attempting",
+            row,
+            col,
+            solvedBoard[row][col]
+        );
+
+        if(solvedBoard[row][col] === X){
+            console.log(
+                "SUN",
+                row,
+                col
+            );
+            clickCell(cell);
+        }
+
+        else if(solvedBoard[row][col] === O){
+            console.log(
+                "MOON",
+                row,
+                col
+            );
+            clickCell(cell);
+            clickCell(cell);
+        }
+    });
+}
+
+function solveTango(){
+    let originalBoard = extractBoard();
+    const board = originalBoard.map(row => [...row]);
+    const constraints=extractConstraints();
+    equality = constraints.equality;
+    opposite = constraints.opposite;
+
+    solve(board);
+    fillBoard(originalBoard, board);
+}
+
+console.log("main js started executing");
+chrome.runtime.onMessage.addListener((message)=>{
+    if(message.action==="solve"){
+        console.log("Message recieved")
+        solveTango();
+    }
+});
