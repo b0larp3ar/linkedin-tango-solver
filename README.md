@@ -1,16 +1,31 @@
 # LinkedIn Tango Solver
 
-Linkedin Tango Solver automatically solves your daily Tango puzzle on Linkedin. When the code is run on the browser console, it fetches the board details from the puzzle, and then the algorithm solves the puzzle and displays the result in a table format
+## Features
 
-## How to use:
+- Automatically extracts the puzzle board
+- Extracts equality and opposite constraints
+- Solves the puzzle using backtracking
+- Fills the puzzle directly on LinkedIn
+- Supports 4×4 and 6×6 boards
 
-* Open your daily Tango puzzle on linkedin
-<img src="images/puzzle.png" style="height: 200px; width: 400px">
+## Technologies
 
-* Right click and click on 'Inspect' to open DevTools
-* Go to browser console
-* Paste the entire code from main.js
-* Press enter
-* The result will be displayed in a table format
-<img src="images/result.png">
+- JavaScript
+- Chrome Extension (Manifest V3)
+- DOM manipulation
 
+## How it works
+
+1. Extract board state
+2. Extract constraints
+3. Solve using backtracking
+4. Simulate mouse events to fill the board
+
+## Installation
+
+1. Download the repository
+2. Open chrome://extensions
+3. Enable Developer Mode
+4. Click Load unpacked
+5. Select the project folder
+6. Open LinkedIn Tango and click Solve

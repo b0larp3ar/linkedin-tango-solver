@@ -1,9 +1,7 @@
 const button = document.getElementById("solve");
 
 button.addEventListener("click", () => {
-
     console.log("button clicked");
-
     chrome.tabs.query(
         {
             active: true,
@@ -11,9 +9,7 @@ button.addEventListener("click", () => {
         },
 
         ([tab]) => {
-
             console.log("tab id:", tab.id);
-
             chrome.tabs.sendMessage(
                 tab.id,
                 { action: "solve" }
@@ -24,9 +20,6 @@ button.addEventListener("click", () => {
             .catch(err => {
                 console.error(err);
             });
-
         }
-
     );
-
 });

@@ -1,10 +1,9 @@
-const SIZE=4;
+let SIZE;
 const E = "empty";
 const X = "sun";
 const O = "moon";
 let equality=[];
 let opposite=[];
-
 
 // extract board
 function extractBoard() {
@@ -347,7 +346,6 @@ function clickCell(cell){
 
 // fill the puzzle in linkedin
 function fillBoard(originalBoard, solvedBoard){
-    console.log("Fillboard started executing");
     const cells = document.querySelectorAll(
         '[data-cell-idx]'
     );
@@ -365,28 +363,11 @@ function fillBoard(originalBoard, solvedBoard){
             return;
         }
 
-        console.log(
-            "Attempting",
-            row,
-            col,
-            solvedBoard[row][col]
-        );
-
         if(solvedBoard[row][col] === X){
-            console.log(
-                "SUN",
-                row,
-                col
-            );
             clickCell(cell);
         }
 
         else if(solvedBoard[row][col] === O){
-            console.log(
-                "MOON",
-                row,
-                col
-            );
             clickCell(cell);
             clickCell(cell);
         }
@@ -394,7 +375,8 @@ function fillBoard(originalBoard, solvedBoard){
 }
 
 function solveTango(){
-    let originalBoard = extractBoard();
+    SIZE = Math.sqrt(document.querySelectorAll('[data-cell-idx]').length);
+    const originalBoard = extractBoard();
     const board = originalBoard.map(row => [...row]);
     const constraints=extractConstraints();
     equality = constraints.equality;
@@ -404,10 +386,8 @@ function solveTango(){
     fillBoard(originalBoard, board);
 }
 
-console.log("main js started executing");
 chrome.runtime.onMessage.addListener((message)=>{
     if(message.action==="solve"){
-        console.log("Message recieved")
         solveTango();
     }
 });
