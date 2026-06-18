@@ -1,25 +1,17 @@
 const button = document.getElementById("solve");
 
 button.addEventListener("click", () => {
-    console.log("button clicked");
     chrome.tabs.query(
         {
             active: true,
-            currentWindow: true
+            currentWindow: true             // get the active tab
         },
 
         ([tab]) => {
-            console.log("tab id:", tab.id);
             chrome.tabs.sendMessage(
                 tab.id,
-                { action: "solve" }
+                { action: "solve" }         // send message to its console(main.js will be listening)
             )
-            .then(() => {
-                console.log("message sent");
-            })
-            .catch(err => {
-                console.error(err);
-            });
         }
     );
 });
