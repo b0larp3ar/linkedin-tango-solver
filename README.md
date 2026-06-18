@@ -81,11 +81,10 @@ popup.js
 
 ## Future Improvements
 
-* [ ] Publish to the Chrome Web Store
-* [ ] Add animations while solving
-* [ ] Add a "Solved!" notification
-* [ ] Improve popup UI
-* [ ] Add support for future LinkedIn Tango updates
+* Publish to the Chrome Web Store
+* Add animations while solving
+* Add a "Solved!" notification
+* Add support for future LinkedIn Tango updates
 
 ## Disclaimer
 
