@@ -8,6 +8,7 @@ The extension extracts the current board state and puzzle constraints from Linke
 
 <div style="align: center;">
    <img src="images/popup.png" style="width: 300px; height: auto;"> 
+   <br>
    <img src="images/video-demo-2x-cropped.gif">
 </div>
 
