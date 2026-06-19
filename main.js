@@ -355,7 +355,6 @@ function clickCell(cell){
 }
 
 // fill the puzzle in linkedin
-// fill the puzzle in linkedin
 async function fillBoard(originalBoard, solvedBoard){
     const cells = document.querySelectorAll('[data-cell-idx]');
 

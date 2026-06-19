@@ -1,33 +1,20 @@
 # LinkedIn Tango Solver
 
-A Chrome extension that automatically solves LinkedIn's Tango puzzle directly inside the browser.
-
+A browser extension that automatically solves LinkedIn's Tango puzzle directly inside the browser. Tested on Chrome, Firefox and Edge.
 The extension extracts the current board state and puzzle constraints from LinkedIn's DOM, solves the puzzle using a backtracking algorithm, and automatically fills the board.
+(...The extension has not been published in the browser web stores yet. Currently awaiting review from Firefox for the publishing of this extension. Users can download the zip file from the latest release and follow the instructions given below to use it...)
 
-## Features
+## How it works:
 
 * Automatically detects the Tango board
 * Extracts existing Sun and Moon placements
 * Detects equality and opposite constraints
 * Solves the puzzle using a backtracking algorithm
-* Automatically fills the board on LinkedIn
+* Simulates mouse events to fill the board in the website
 * Supports both 4×4 and 6×6 boards
-* One-click solve from a Chrome extension popup
+* One-click solve from an extension popup
 
-## How it works
-
-1. Read the current puzzle state from the page.
-2. Extract equality (=) and opposite (×) constraints.
-3. Apply Tango rules:
-
-   * No three consecutive identical symbols in any row or column.
-   * Each row and column must contain an equal number of Suns and Moons.
-   * Equality constraints must be satisfied.
-   * Opposite constraints must be satisfied.
-4. Use recursive backtracking to find a valid solution.
-5. Simulate mouse events to fill the puzzle automatically.
-
-## Technologies Used
+## Tech stack:
 
 * JavaScript
 * Chrome Extension (Manifest V3)
@@ -35,7 +22,7 @@ The extension extracts the current board state and puzzle constraints from Linke
 * Recursive Backtracking
 * Event Simulation
 
-## Installation
+## How to install and use:
 
 1. Clone this repository:
 
@@ -67,26 +54,31 @@ https://www.linkedin.com/games/tango/
 
 ```
 linkedin-tango-solver/
-
-manifest.json
-
-main.js
-
-popup.html
-
-popup.css
-
-popup.js
+|
+├──images/
+|
+├── manifest.json
+|
+├── main.js
+|
+├── popup.html
+|
+├── popup.css
+|
+├── popup.js
+|
+├── icon16.png
+|
+├── icon48.png
+|
+├── icon128.png
+|
+└── README.md
 ```
 
 ## Future Improvements
 
-* Publish to the Chrome Web Store
-* Add animations while solving
-* Add a "Solved!" notification
+* Publish to the Chrome Web Store and Firefox Add-ons
 * Add support for future LinkedIn Tango updates
 
-## Disclaimer
-
-This project is an independent educational project and is not affiliated with, endorsed by, or maintained by LinkedIn.
 
