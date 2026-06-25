@@ -2,7 +2,8 @@
 
 A browser extension that automatically solves LinkedIn's Tango puzzle directly inside the browser. Tested on Chrome, Firefox and Edge.
 The extension extracts the current board state and puzzle constraints from LinkedIn's DOM, solves the puzzle using a backtracking algorithm, and automatically fills the board.
-(...The extension has not been published in the browser web stores yet. Currently awaiting review from Firefox for the publishing of this extension. Users can download the zip file from the latest release and follow the instructions given below to use it...)
+
+Available on Firefox: https://addons.mozilla.org/en-US/firefox/addon/linkedin-tango-solver-by-shree/ 
 
 ## Screenshots
 
@@ -32,7 +33,7 @@ The extension extracts the current board state and puzzle constraints from Linke
 * Recursive Backtracking
 * Event Simulation
 
-## How to install and use:
+## How to install in Chrome and use:
 
 1. Clone this repository:
 
@@ -88,7 +89,6 @@ linkedin-tango-solver/
 
 ## Future Improvements
 
-* Publish to the Chrome Web Store and Firefox Add-ons
 * Add support for future LinkedIn Tango updates
 
 

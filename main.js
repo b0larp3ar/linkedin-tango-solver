@@ -372,14 +372,14 @@ async function fillBoard(originalBoard, solvedBoard){
 
         if(solvedBoard[row][col]===X){
             clickCell(cell);
-            await sleep(200);
+            await sleep(100);
         }
 
         else if(solvedBoard[row][col]===O){
             clickCell(cell);
-            await sleep(200);
+            await sleep(100);
             clickCell(cell);
-            await sleep(200);
+            await sleep(100);
         }
     }
 
