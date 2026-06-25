@@ -1,8 +1,36 @@
+@font-face {
+    font-family: "Outfit";
+    src: url("fonts/Outfit-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
 body{
-    background-color: #473198;
-    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(168,85,247,.28), transparent 30%),
+        radial-gradient(circle at 85% 85%, rgba(56,189,248,.20), transparent 35%),
+        radial-gradient(circle at 70% 20%, rgba(236,72,153,.12), transparent 25%),
+        linear-gradient(
+            145deg,
+            #22104a 0%,
+            #39217e 30%,
+            #5034a7 60%,
+            #31205d 100%
+        );
+    font-family: "Outfit", system-ui, sans-serif;
     width: 350px;
     padding: 20px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+
+    background-size: 22px 22px;
 }
 
 h2{
@@ -21,24 +49,63 @@ h2{
     font-size: 18px;
 }
 
-.description, .footer{
+.version{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 28px;
+
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+
+    backdrop-filter: blur(8px);
+}
+
+.description{
+    color: #c0c0c0;
+}
+
+.footer{
     color: #989898;
 }
 
 button{
-    background-color: #9bf3f0;
+    background: linear-gradient(
+        135deg,
+        #b8ffff 0%,
+        #8af5ff 45%,
+        #74dff9 100%
+    );
+    
+    color: #2f0d63;
+
     border: none;
-    border-radius: 20px;
-    width: 100%;
-    padding: 15px;
-    font-size: 15px;
-    font-weight: bold;
+    border-radius: 18px;
+
+    padding: 15px 34px;
+
+    font-size: 17px;
+    font-weight: 700;
+
     cursor: pointer;
-    color: #4a0d67;
-    transition: 0.3s;
+
+    box-shadow:
+        0 8px 24px rgba(117, 236, 255, .35),
+        inset 0 1px rgba(255,255,255,.6);
+
+    transition: .25s ease;
 }
 
 button:hover{
-    background-color: #db601e;
-    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow:
+        0 14px 34px rgba(117,236,255,.45),
+        inset 0 1px rgba(255,255,255,.7);
 }
